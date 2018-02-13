@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var authRoutes = require("./routes/auth");
 var prefRoutes = require("./routes/preferences");
+// var recipeRoutes = require("./routes/recipes");
 var db = require("./models");
 var cors = require('cors');
 
@@ -24,7 +25,7 @@ app.get('/', function(req, res){
 });
 
 //change this to work with our recipe api
-app.use('api/users/:id/preferences')
+// app.use('api/users/:id/preferences')
 app.use ('/api/auth', authRoutes);
 
 const PORT = 8081;
