@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/recipe-api');
+mongoose.Promise =global.Promise;
+mongoose.connect('mongodb://localhost/prepShopSave',{
+    keepAlive: true,
+    reconnectTries: Number.MAX_VALUE,
+   
+});
 
-mongoose.Promise = Promise;
 
-module.exports.Todo = require("./recipe");
+
+module.exports.User = require("./user");
