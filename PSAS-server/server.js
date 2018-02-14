@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 var express = require('express');
 var app = express();
 // var port = process.env.PORT || 3000;
@@ -10,6 +10,8 @@ var db = require("./models");
 var cors = require('cors');
 
 //routes go here
+
+console.log(process.env.NAME);
 
 
 app.use(cors());
@@ -28,7 +30,8 @@ app.get('/', function(req, res){
 // app.use('api/users/:id/preferences')
 app.use ('/api/auth', authRoutes);
 
-const PORT = 8081;
+const PORT = 8081; 
 app.listen(PORT, function(){
     console.log(`APP IS RUNNING ON PORT ${PORT}` );
 })
+
