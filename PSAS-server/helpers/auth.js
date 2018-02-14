@@ -9,7 +9,7 @@ exports.signin = function (req, res) {
             if (isMatch) {
                 var token = jwt.sign({
                     userId: user.id
-                }, process.env.SECRET_KEY);
+                }, process.env.NAME);
                 res.status(200).json({
                     userId: user.id,
                     username: user.username,
@@ -31,7 +31,7 @@ exports.signin = function (req, res) {
 exports.signup = function (req, res, next) {
     db.User.create(req.body).then(function (user) {
         var token = jwt.sign({
-            userId: user.id}, process.env.SECRET_KEY);
+            userId: user.id}, process.env.NAME);
         res.status(200).json({
             userId: user.id,
             username: user.username,
