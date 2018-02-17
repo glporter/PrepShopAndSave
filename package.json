@@ -17,6 +17,7 @@
         "theme",
         "template"
     ],
+    "proxy": "http://localhost:8081",
     "homepage": "https://startbootstrap.com/template-overviews/landing-page",
     "bugs": {
         "url": "https://github.com/BlackrockDigital/startbootstrap-landing-page/issues",
@@ -32,6 +33,7 @@
         "url": "https://github.com/BlackrockDigital/startbootstrap-landing-page.git"
     },
     "dependencies": {
+        "axios": "^0.17.1",
         "bootstrap": "4.0.0",
         "concurrently": "^3.5.1",
         "font-awesome": "4.7.0",

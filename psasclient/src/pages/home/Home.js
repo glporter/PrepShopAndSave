@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 // import "./home.css";
 
@@ -20,21 +22,29 @@ class Home extends Component {
             username: '',
             password: ''
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleSubmit(e){
+    onSubmit = (e) => {
         e.preventDefault();
-        this.props.onAuth(this.state);
-    }
+        // get our form data out of state
+        const { username, password, email } = this.state;
+
+        axios.post('/api/auth/signup', { username, password, email })
+          .then((result) => {
+           console.log(result);
+          });
+      }
+
+
 handleChange(e){
 e.preventDefault();
 this.setState({[e.target.name]: e.target.value});
 }
-    getValues = () => {
+    // getValues = () => {
 
-    };
+    // };
 
     render() {
         const {email, username, password} = this.state;
@@ -55,7 +65,8 @@ this.setState({[e.target.name]: e.target.value});
                                     Sign up to get started with Prep Shop & Save!
                                 </p>
                                 <div className="mt-4">
-                                    <form onSubmit ={this.handleSubmit}>
+                          
+                                    <form onSubmit={this.onSubmit}>
                                         <div className="form-group">
                                             <input 
                                             type="username" 

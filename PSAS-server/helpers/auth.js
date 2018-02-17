@@ -29,13 +29,17 @@ exports.signin = function (req, res) {
 };
 
 exports.signup = function (req, res, next) {
+    console.log(req.body);
     db.User.create(req.body).then(function (user) {
-        console.log(process);
+        //console.log(process);
+        console.log(process.env.NAME);
+        console.log('model success creation');
         var token = jwt.sign({
-            userId: user.id}, process.env.NAME);
+            userId: user.id}, process.env.SECRET || "Meg's Secret");
+            console.log(token);
+            
         res.status(200).json({
-            userId: user.id,
-            username: user.username,
+            user,
             token
         });
     }).catch(function (err) {
