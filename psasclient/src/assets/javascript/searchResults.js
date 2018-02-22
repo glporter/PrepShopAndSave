@@ -1,7 +1,7 @@
 // call the edamam api to get the recipe and ingredients in a single call
 
 'use strict';
-//import './recipe.js';
+//import '.src/assets/javascript/recipe.js';
 
 var ingredientString = "";
 
@@ -29,8 +29,11 @@ var htmlString = "";
 
 //MealPlan screen addToMealPlanBtn
 $(document).on("click", ".addToMealPlan", function() {
-    alert("addToMealPlan button pressed...");
+    console.log($(".recipe-id").text);
+    //alert("addToMealPlan button pressed...");
 
+    var label = $(this).parent().parent().find("h4").text();
+    console.log(label);
 });
 
 //MealPlan screen addToFavoritesBtn
@@ -67,7 +70,10 @@ function buildRecipeCards(cardsPerRow) {
 
     for (var i = 0; i < recipeList.length; i++) {
 
+
         $("#currentRow").append(cardTemplate(recipeList[i]));
+        $(".recipe-id").val(i.toString());
+        //console.log("Recipe-Id: " + i.toString());
 
         if (i % cardsPerRow == (cardsPerRow - 1)) {
             $("#currentRow").removeAttr("id");
@@ -86,7 +92,7 @@ function buildIngredientsCheckBox(currentIngredientsList) {
 
     }
     htmlString += "</form>";
-    console.log(htmlString);
+    //console.log(htmlString);
     return htmlString;
 }
 
@@ -185,8 +191,8 @@ function callEdamamAPI() {
                 returnedRecipes.forEach(function(recipeObj) { // loop through returned recipe objects from food2fork
 
                     recipeList.push(recipeObj);
-                    console.log("RecipeList Array: " + recipeList);
-                    console.log("Recipe Object: " + recipeObj.recipe.image);
+                    //console.log("RecipeList Array: " + recipeList);
+                    //console.log("Recipe Object: " + recipeObj.recipe.image);
 
                 }); // end for each
             } // end if

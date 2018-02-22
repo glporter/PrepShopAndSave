@@ -28,14 +28,9 @@ var htmlString = "";
 //*****var picTemplate = Handlebars.compile($("#pic-template").html());
 
 //MealPlan screen addToMealPlanBtn
-$(document).on("click", ".addToMealPlan", function() {
+$("#addToMealPlan").on("click", function() {
     alert("addToMealPlan button pressed...");
 
-});
-
-//MealPlan screen addToFavoritesBtn
-$(document).on("click", ".addToFavorites", function() {
-    alert("addToFavoritesBtn button pressed...");
 });
 
 
@@ -55,7 +50,10 @@ $("#searchBtn").on("click", function() {
 recipesToFind();
 
 
-
+//MealPlan screen addToFavoritesBtn
+$("#addToFavorites").on("click", function() {
+    alert("addToFavoritesBtn button pressed...");
+});
 
 
 
@@ -65,6 +63,8 @@ function buildRecipeCards(cardsPerRow) {
 
     $("#recipe-cards").append($("<div>").addClass("row").attr("id", "currentRow"));
 
+    console.log("RecipeList: " + recipeList);
+
     for (var i = 0; i < recipeList.length; i++) {
 
         $("#currentRow").append(cardTemplate(recipeList[i]));
@@ -73,8 +73,18 @@ function buildRecipeCards(cardsPerRow) {
             $("#currentRow").removeAttr("id");
             $("#recipe-cards").append($("<div>").addClass("row").attr("id", "currentRow"));
         }
+
+        //*****htmlString = buildIngredientsCheckBox(recipeList[i].recipe.ingredientLines);
+        //document.getElementById("ingredients").innerHTML = htmlString;
+        //$("#ingredients").text.val(htmlString);
+        //*****htmlString = "";
     }
-}
+
+    //document.getElementById("ingredients").innerHTML = htmlString;
+    //$("#ingredients").text.val(htmlString);
+    //htmlString = "";
+
+} //buildRecipeCards(cardsPerRow)
 
 
 function buildIngredientsCheckBox(currentIngredientsList) {
@@ -103,6 +113,45 @@ function recipesToFind() {
     //getIngredientsByRecipeId();
 
 }
+
+
+function callFood2ForkAPI() {
+
+    //var protein = ingredientListToText();
+    //console.log("Protein: " + protein);
+
+    $.ajax({ // async call to food2fork api to search by ingredients
+        url: apiURL.searchByIngredients + proteinItem, //+ encodeIngredientListForURL(),
+        method: "GET",
+        headers: {
+            'X-Mashape-Key': apiKey.mashApe,
+            'Accept': 'application/json'
+        }
+    }).done( // callback function
+
+        function(searchByIngredientResults) {
+
+            console.log("searchByIngredientResults: " + searchByIngredientResults);
+
+            var returnedRecipes = JSON.parse(searchByIngredientResults).recipes // array of json recipe objects
+
+            console.log("ReturnedRecipes: " + returnedRecipes);
+
+            recipeList = [];
+            if (returnedRecipes.length > 0) {
+                returnedRecipes.forEach(function(recipeObj) { // loop through returned recipe objects from food2fork
+
+                    recipeList.push(recipeObj);
+
+                }); // end for each
+            } // end if
+
+            $("#recipe-cards").empty();
+            buildRecipeCards(1);
+
+        }); // end call back function
+
+} // end callFood2ForkAPI function
 
 
 function getIngredientsByRecipeId() {
@@ -184,8 +233,7 @@ function callEdamamAPI() {
             if (returnedRecipes.length > 0) {
                 returnedRecipes.forEach(function(recipeObj) { // loop through returned recipe objects from food2fork
 
-                    recipeList.push(recipeObj);
-                    console.log("RecipeList Array: " + recipeList);
+                    //recipeList.push(recipeObj);
                     console.log("Recipe Object: " + recipeObj.recipe.image);
 
                 }); // end for each

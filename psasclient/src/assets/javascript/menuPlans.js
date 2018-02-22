@@ -33,11 +33,6 @@ $(document).on("click", ".addToMealPlan", function() {
 
 });
 
-//MealPlan screen addToFavoritesBtn
-$(document).on("click", ".addToFavorites", function() {
-    alert("addToFavoritesBtn button pressed...");
-});
-
 
 //Home Menu screen Searh Button is clicked
 $("#searchBtn").on("click", function() {
@@ -55,7 +50,10 @@ $("#searchBtn").on("click", function() {
 recipesToFind();
 
 
-
+//MealPlan screen addToFavoritesBtn
+$("#addToFavorites").on("click", function() {
+    alert("addToFavoritesBtn button pressed...");
+});
 
 
 
@@ -73,7 +71,19 @@ function buildRecipeCards(cardsPerRow) {
             $("#currentRow").removeAttr("id");
             $("#recipe-cards").append($("<div>").addClass("row").attr("id", "currentRow"));
         }
+
+        htmlString = buildIngredientsCheckBox(recipeList[i].recipe.ingredientLines);
+        console.log("Recipe ingredientsLine: " + recipeList[i].recipe.ingredientLines);
+        console.log("htmlString: " + htmlString);
+
+        //document.getElementById(".ingredients").innerHTML = htmlString;
+        $(".ingredients").html(htmlString);
+        htmlString = "";
+
+
     }
+
+
 }
 
 
@@ -86,7 +96,7 @@ function buildIngredientsCheckBox(currentIngredientsList) {
 
     }
     htmlString += "</form>";
-    console.log(htmlString);
+    //console.log(htmlString);
     return htmlString;
 }
 
