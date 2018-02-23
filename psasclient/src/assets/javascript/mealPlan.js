@@ -63,7 +63,6 @@ function buildRecipeCards(cardsPerRow) {
 
     $("#recipe-cards").append($("<div>").addClass("row").attr("id", "currentRow"));
 
-
     for (var i = 0; i < recipeList.length; i++) {
 
         $("#currentRow").append(cardTemplate(recipeList[i]));
@@ -78,14 +77,25 @@ function buildRecipeCards(cardsPerRow) {
         console.log("htmlString: " + htmlString);
 
         //document.getElementById(".ingredients").innerHTML = htmlString;
-        $(".ingredients").html(htmlString);
-        htmlString = "";
+        //$(".ingredients").html(htmlString);
+        $(".ingredients").each(function(index, value) {
 
+            if (index === i) {
+                $(this).html(htmlString);
+            }
+        });
+
+
+        htmlString = "";
 
     }
 
-
 }
+
+//iterate through all the checkboxes to identify the ones that are checked
+//$('input[type="checkbox"]:checked').each(function(){
+
+//})
 
 
 function buildIngredientsCheckBox(currentIngredientsList) {

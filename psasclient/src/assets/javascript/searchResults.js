@@ -34,6 +34,7 @@ $(document).on("click", ".addToMealPlan", function() {
 
     var label = $(this).parent().parent().find("h4").text();
     console.log(label);
+
 });
 
 //MealPlan screen addToFavoritesBtn
