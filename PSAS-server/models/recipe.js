@@ -4,7 +4,7 @@ var recipeSchema = new mongoose.Schema({
     userid: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     recipeid: {
         type: String,

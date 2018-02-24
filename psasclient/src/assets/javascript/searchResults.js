@@ -29,11 +29,12 @@ var htmlString = "";
 
 //MealPlan screen addToMealPlanBtn
 $(document).on("click", ".addToMealPlan", function() {
-    console.log($(".recipe-id").text);
+    //console.log($(".recipe-id").text);
     //alert("addToMealPlan button pressed...");
 
     var label = $(this).parent().parent().find("h4").text();
     console.log(label);
+
 });
 
 //MealPlan screen addToFavoritesBtn
@@ -104,6 +105,7 @@ function recipesToFind() {
 
     //$("#text-bar").html("Top Recipes Containing: " + ingredientListToText());
     //callFood2ForkAPI();
+    proteinItem = localStorage.getItem("proteinItem", proteinItem);
     callEdamamAPI();
     //callEdamamAPITest();
     //getIngredientsByRecipeId();
@@ -158,8 +160,8 @@ function callEdamamAPI() {
     //console.log("SearchByProteinString: " + apiURL.searchByProtein);
 
     $.ajax({ // async call to edamamAPI api to search by ingredients
-        // url: apiURL.searchByProtein + proteinItem + "&app_id=9db7838c&app_key=" + apiKey.edamam,
-        url: apiURL.searchByProtein + "chicken" + "&app_id=9db7838c&app_key=" + apiKey.edamam,
+        url: apiURL.searchByProtein + proteinItem + "&app_id=9db7838c&app_key=" + apiKey.edamam,
+        // url: apiURL.searchByProtein + "chicken" + "&app_id=9db7838c&app_key=" + apiKey.edamam,
         method: "GET"
             //headers: {
             //'X-Mashape-Key': apiKey.mashApe,
